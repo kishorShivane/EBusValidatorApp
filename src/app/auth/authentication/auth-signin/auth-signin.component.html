@@ -1,0 +1,38 @@
+<div class="auth-wrapper">
+  <div class="auth-content">
+    <div class="auth-bg">
+      <span class="r"></span>
+      <span class="r s"></span>
+      <span class="r s"></span>
+      <span class="r"></span>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="card">
+      <div class="card-body text-center">
+        <div class="mb-4">
+          <i class="feather icon-unlock auth-icon"></i>
+        </div>
+        <h3 class="mb-4">Login</h3>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="userName" formControlName = "userName" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
+          <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+            <div *ngIf="f.userName.errors.required">Username is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+        <div class="mb-4">
+          <input type="password" class="form-control" placeholder="Password" formControlName = "password" [ngClass]="{'is-invalid': submitted && f.password.errors}">
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+          </div>
+        </div>
+        </div>
+        <div class="form-group">
+        <button class="btn btn-primary mb-4" placement="top" ngbTooltip="Tooltip on top">Login</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
+

@@ -1,0 +1,37 @@
+<p>Filter smartcard serial data by typing in the below text box</p>
+
+<form>
+  <div class="form-group form-inline">
+    Smartcard Number Search: <input class="form-control ml-2" type="text" [formControl]="filter" />
+  </div>
+</form>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">SmartCard Number</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Card Type</th>
+      <th scope="col">Edit</th>
+      <!-- <th scope="col">Delete</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let smartCard of smartCardList$ | async; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>
+        <ngb-highlight [result]="smartCard.SmartcardNumber" [term]="filter.value"></ngb-highlight>
+      </td>
+      <td>{{smartCard.Name}}</td>
+      <td>{{smartCard.EMail}}</td>
+      <td>{{smartCard.CardType}}</td>
+      <td><a (click)="navigateToUpdate(smartCard.ID)"><i class="icon feather icon-edit"></i></a></td>
+      <!-- <td><i class="icon feather icon-trash"></i></td> -->
+      <!-- <td><ngb-highlight [result]="smartCard.Name" [term]="filter.value"></ngb-highlight></td> -->
+      <!-- <td><ngb-highlight [result]="smartCard.EMail" [term]="filter.value"></ngb-highlight></td>
+    <td><ngb-highlight [result]="smartCard.CardType" [term]="filter.value"></ngb-highlight></td> -->
+    </tr>
+  </tbody>
+</table>

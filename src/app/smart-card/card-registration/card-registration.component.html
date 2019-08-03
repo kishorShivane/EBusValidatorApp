@@ -1,0 +1,146 @@
+<app-card cardTitle="SmartCard Register" [options]="false">
+  <div class="row">
+    <div class="col-sm-12">
+      <form [formGroup]="cardRegistrationForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="txtSmartCardNumber">SmartCard Number</label>
+              <input type="text" class="form-control" formControlName="SmartcardNumber" id="txtSmartCardNumber"
+                placeholder="Enter smartcard number" [ngClass]="{'is-invalid': submitted && f.SmartcardNumber.errors}"/>
+              <div *ngIf="submitted && f.SmartcardNumber.errors" class="invalid-feedback">
+                <div *ngIf="f.SmartcardNumber.errors.required">Smartcard number is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="txtName"> Name</label>
+              <input type="text" formControlName="Name" class="form-control" id="txtName" placeholder="Enter the name"/>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="txtSurname">Surname</label>
+              <input type="text" class="form-control" formControlName="Surname" id="txtSurname"
+                placeholder="Enter surname">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label> Gender</label><br>
+              <div class="btn-group btn-group-toggle" ngbRadioGroup>
+                <label ngbButtonLabel [ngClass]="setRadioButton(f.Gender,'Male','Male')">
+                  <input ngbButton type="radio" value="Male" formControlName="Gender"/> Male
+                </label>
+                <label ngbButtonLabel [ngClass]="setRadioButton(f.Gender,'Female','Male')">
+                  <input ngbButton type="radio" value="Female" formControlName="Gender"/> Female
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="txtCellphone">Cellphone</label>
+              <input type="text" class="form-control" formControlName="CellPhone" id="txtCellphone"
+                placeholder="Enter cellphone number"/>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="txtEMail">Email</label>
+              <input type="email" class="form-control" formControlName="EMail" id="txtEMail" placeholder="Enter email"
+                [ngClass]="{'is-invalid': submitted && f.EMail.errors}" />
+              <div *ngIf="submitted && f.EMail.errors" class="invalid-feedback">
+                <div *ngIf="f.eMail.errors.EMail">Enter a valid email address</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label> Card Type</label>
+              <select class="form-control" id="ddlCardType" formControlName="CardType">
+                <option value="">--Select--</option>
+                <option value="Scholar">Scholar</option>
+                <option value="Ad-hoc">Ad-hoc</option>
+                <option value="Driver">Driver</option>
+                <option value="Inspector ">Inspector</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="txtNumber">Number</label>
+              <input type="text" class="form-control" formControlName="Number" id="txtNumber"
+                placeholder="Enter number"/>
+            </div>
+          </div>
+          <div class="col-md-4">
+              <input type="hidden" class="form-control" formControlName="ID" id="hdnID" />
+          </div>
+        </div>
+        <div formArrayName="Guardians">
+          <div class="col-12" *ngFor="let group of guardianArray.controls; let i = index;" [formGroupName]="i">
+          <h5 class="mt-5">Kin - {{i+1}}
+            <div class="float-right">
+              <button type="button" class="uk-margin-right" class="btn-sm btn-success" (click)="addGuardian()">Add</button>&nbsp;&nbsp;
+              <button type="button"  class="btn-sm btn-danger" (click)="removeGuardian(i)">Delete</button>
+            </div>
+          </h5>
+          <hr>
+          <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="txtGOName"> Name</label>
+                  <input type="text" class="form-control" formControlName="Name" id="txtGOName" placeholder="Enter the name"/>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="txtGOSurname">Surname</label>
+                  <input type="text" class="form-control" formControlName="Surname" id="txtGOSurname" placeholder="Enter surname"/>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Relationship</label>
+                  <select class="form-control" id="ddlGORelationship" formControlName="RelationShip">
+                    <option value="">--Select--</option>
+                    <option value="Parent">Parent</option>
+                    <option value="Spouse">Spouse</option>
+                    <option value="Sibling">Sibling</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="txtGOCellphone">Cellphone</label>
+                  <input type="text" class="form-control" formControlName="CellPhone" id="txtGOCellphone" placeholder="Enter cellphone number" />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="txtGOTelePhone">TelePhone</label>
+                  <input type="text" class="form-control" formControlName="TelePhone" id="txtGOTelePhone" placeholder="Enter telephone number" />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="txtGOEMail">Email</label>
+                  <input type="email" class="form-control" formControlName="EMail" id="txtGOEMail" placeholder="Enter email"
+                  [ngClass]="{'is-invalid': submitted && group.controls.EMail.errors}" />
+                <div *ngIf="submitted && group.controls.EMail.errors" class="invalid-feedback">
+                  <div *ngIf="group.controls.EMail.errors.email">Enter a valid email address</div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</app-card>
