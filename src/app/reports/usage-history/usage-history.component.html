@@ -2,46 +2,55 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="form-group">
               <label for="txtFromDate">From Date</label>
               <input type="text" bsDatepicker class="form-control" [bsConfig]="bsConfig" [(ngModel)]="fromDate"
                 title="From Date {dd-mm-yyy}" />
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="form-group">
               <label for="txtToDate">To Date</label>
               <input type="text" bsDatepicker class="form-control" [bsConfig]="bsConfig" [(ngModel)]="toDate"
                 title="To Date {dd-mm-yyy}" />
             </div>
           </div>
-          <div class="col-md-4 searchBtnDiv">
-            <button type="button" class="btn btn-primary" (click)="searchUsageSummary()">Submit</button>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="txtSmartCard">Smartcard</label>
+              <input type="text" class="form-control" [(ngModel)]="smartcard"
+                placeholder="smartcard number" />
+            </div>
+          </div>
+          <div class="col-md-3 searchBtnDiv">
+            <button type="button" class="btn btn-primary" (click)="searchUsageHistory()">Submit</button>
           </div>
         </div>
       </div>
     </div>
   </app-card>
   
-  <div class="table100" #usageSummaryResult style="display: none;">
+  <div class="table100" #usageHistoryResult style="display: none;">
     <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
       <thead>
         <tr class="table100-head">
-          <th>SurName</th>
-          <th>FirstName</th>
           <th>Smartcard</th>
-          <th>TotalTagIN’s</th>
-          <th>Kilometers</th>
+          <th>ActivityType</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Bus</th>
+          <th>Driver</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let summary of filteredData">
-          <td>{{ summary.SurName }}</td>
-          <td>{{ summary.FirstName }}</td>
           <td>{{ summary.Smartcard }}</td>
-          <td>{{ summary.TotalTagIns }}</td>
-          <td>{{ summary.Kilometers }}</td>
+          <td>{{ summary.ActivityType }}</td>
+          <td>{{ summary.Date }}</td>
+          <td>{{ summary.Time }}</td>
+          <td>{{ summary.Bus }}</td>
+          <td>{{ summary.Driver }}</td>
         </tr>
       </tbody>
     </table>

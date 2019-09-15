@@ -21,8 +21,19 @@ export class usageSummary
     Kilometers: string;
 }
 
+export class usageHistory
+{
+    Smartcard: string;
+    ActivityType: string;
+    Date: string;
+    Time: string;
+    Bus: string;
+    Driver: string;
+}
+
 export class SearchParams
 {
     FromDate: Date;
     ToDate: Date;
+    Smartcard?: string = "";
 }

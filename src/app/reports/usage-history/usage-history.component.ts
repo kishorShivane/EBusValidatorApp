@@ -4,7 +4,7 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { Router } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { Subject } from 'rxjs';
-import { usageSummary } from 'src/models/reports';
+import { usageHistory } from 'src/models/reports';
 
 @Component({
   selector: 'app-usage-history',
@@ -12,7 +12,7 @@ import { usageSummary } from 'src/models/reports';
   styleUrls: ['./usage-history.component.scss']
 })
 export class UsageHistoryComponent implements OnInit {
-  @ViewChild('usageSummaryResult') usageSummaryResult: ElementRef;
+  @ViewChild('usageHistoryResult') usageHistoryResult: ElementRef;
   constructor(private service: ReportsService, private router: Router, private notificationService: NotificationService) {
   }
 
@@ -30,7 +30,8 @@ export class UsageHistoryComponent implements OnInit {
   //Form properties
   fromDate: Date;
   toDate: Date;
-  filteredData: usageSummary[];
+  smartcard: string;
+  filteredData: usageHistory[];
 
   ngOnInit(): void {
 
@@ -50,12 +51,6 @@ export class UsageHistoryComponent implements OnInit {
           className: 'btn btn-primary'
         }]
     };
-
-    // this.service.GetAllTransactions().subscribe(data => {
-    //   debugger;
-    //   this.filteredData = data;
-    //   this.dtTrigger.next();
-    // });
   }
 
   ngOnDestroy(): void {
@@ -63,12 +58,12 @@ export class UsageHistoryComponent implements OnInit {
     this.dtTrigger.unsubscribe();
   }
 
-  searchUsageSummary() {
-    if (!(this.fromDate && this.toDate)) {
+  searchUsageHistory() {
+    if (!(this.fromDate && this.toDate && this.smartcard)) {
       this.notificationService.showWarning("Please enter from and to date!!", "Warning");
     }
     else {
-      this.service.GetTransactions(this.fromDate, this.toDate).subscribe(data => {
+      this.service.GetUsageHistory(this.fromDate, this.toDate,this.smartcard).subscribe(data => {
         debugger;
         this.filteredData = data;
         this.toggleResultGrid();
@@ -81,11 +76,11 @@ export class UsageHistoryComponent implements OnInit {
     var resultCount = this.filteredData.length;
     if ( resultCount > 0) {
       this.dtTrigger.next();
-      this.usageSummaryResult.nativeElement.style = "display:block;";
+      this.usageHistoryResult.nativeElement.style = "display:block;";
       this.notificationService.shoInfo(resultCount+": records found!!","Information");
     }
     else {
-      this.usageSummaryResult.nativeElement.style = "display:none;";
+      this.usageHistoryResult.nativeElement.style = "display:none;";
       this.notificationService.shoInfo("No matching records found!!","Information")
     }
   }

@@ -68,7 +68,7 @@ export class UsageSummaryComponent implements OnInit {
       this.notificationService.showWarning("Please enter from and to date!!", "Warning");
     }
     else {
-      this.service.GetTransactions(this.fromDate, this.toDate).subscribe(data => {
+      this.service.GetUsageSummaries(this.fromDate, this.toDate).subscribe(data => {
         debugger;
         this.filteredData = data;
         this.toggleResultGrid();
