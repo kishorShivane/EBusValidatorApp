@@ -15,17 +15,16 @@ import { Router } from '@angular/router';
 export class ListCardComponent implements OnInit {
 
   smartCardList$: Observable<SmartCard[]>;
-  smartCardList : SmartCard[];
+  smartCardList: SmartCard[];
   filter = new FormControl('');
-  
+
   constructor(private pipe: DecimalPipe, private service: SmartCardService, private router: Router) {
   }
 
-  ngOnInit(){
-    this.service.GetAllSmartCard().subscribe(data=>{
+  ngOnInit() {
+    this.service.GetAllSmartCard().subscribe(data => {
       debugger;
-      if(data)
-      {
+      if (data) {
         this.smartCardList = data;
         this.smartCardList$ = this.filter.valueChanges.pipe(
           startWith(''),
@@ -36,19 +35,18 @@ export class ListCardComponent implements OnInit {
   }
 
   search(text: string, pipe: PipeTransform): SmartCard[] {
-    debugger;    
-      return this.smartCardList.filter(smartCard => {
-          const term = text.toLowerCase();
-          return smartCard.SmartcardNumber.toLowerCase().includes(term);
-              // || smartCard.Name.toLowerCase().includes(term)
-              // || smartCard.EMail.toLowerCase().includes(term)
-              // || smartCard.CardType.toLowerCase().includes(term);
-        });
+    debugger;
+    return this.smartCardList.filter(smartCard => {
+      const term = text.toLowerCase();
+      return smartCard.SmartcardNumber.toLowerCase().includes(term)
+        || smartCard.Name.toLowerCase().includes(term)
+        || smartCard.EMail.toLowerCase().includes(term)
+        || smartCard.CardType.toLowerCase().includes(term);
+    });
   }
 
-  navigateToUpdate(id)
-  {
-    this.router.navigate(["/smartcard/register/"+id]);
+  navigateToUpdate(id) {
+    this.router.navigate(["/smartcard/register/" + id]);
   }
 
 }
