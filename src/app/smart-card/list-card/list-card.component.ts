@@ -35,7 +35,6 @@ export class ListCardComponent implements OnInit {
   }
 
   search(text: string, pipe: PipeTransform): SmartCard[] {
-    debugger;
     return this.smartCardList.filter(smartCard => {
       const term = text.toLowerCase();
       return smartCard.SmartcardNumber.toLowerCase().includes(term)
