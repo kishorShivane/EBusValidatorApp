@@ -39,10 +39,10 @@ export class ListCardComponent implements OnInit {
     debugger;    
       return this.smartCardList.filter(smartCard => {
           const term = text.toLowerCase();
-          return smartCard.SmartcardNumber.toLowerCase().includes(term);
-              // || smartCard.Name.toLowerCase().includes(term)
-              // || smartCard.EMail.toLowerCase().includes(term)
-              // || smartCard.CardType.toLowerCase().includes(term);
+          return smartCard.SmartcardNumber.toLowerCase().includes(term)
+               || smartCard.Name.toLowerCase().includes(term)
+               || smartCard.EMail.toLowerCase().includes(term)
+               || smartCard.CardType.toLowerCase().includes(term);
         });
   }
 
