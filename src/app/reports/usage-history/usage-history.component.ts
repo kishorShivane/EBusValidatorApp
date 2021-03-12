@@ -16,7 +16,7 @@ export class UsageHistoryComponent implements OnInit {
   constructor(private service: ReportsService, private router: Router, private notificationService: NotificationService) {
   }
 
-  //Date control properties
+  //Date control properties 
   bsConfig: Partial<BsDatepickerConfig> = Object.assign({}, {
     containerClass: "theme-blue",
     dateInputFormat: 'DD-MM-YYYY'
@@ -60,10 +60,10 @@ export class UsageHistoryComponent implements OnInit {
 
   searchUsageHistory() {
     if (!(this.fromDate && this.toDate && this.smartcard)) {
-      this.notificationService.showWarning("Please enter from and to date!!", "Warning");
+      this.notificationService.showWarning("Please enter from data, to date and smartcard to filter!!", "Warning");
     }
     else {
-      this.service.GetUsageHistory(this.fromDate, this.toDate,this.smartcard).subscribe(data => {
+      this.service.GetUsageHistory(this.fromDate, this.toDate, this.smartcard).subscribe(data => {
         debugger;
         this.filteredData = data;
         this.toggleResultGrid();
@@ -74,14 +74,14 @@ export class UsageHistoryComponent implements OnInit {
 
   toggleResultGrid() {
     var resultCount = this.filteredData.length;
-    if ( resultCount > 0) {
+    if (resultCount > 0) {
       this.dtTrigger.next();
       this.usageHistoryResult.nativeElement.style = "display:block;";
-      this.notificationService.shoInfo(resultCount+": records found!!","Information");
+      this.notificationService.shoInfo(resultCount + ": records found!!", "Information");
     }
     else {
       this.usageHistoryResult.nativeElement.style = "display:none;";
-      this.notificationService.shoInfo("No matching records found!!","Information")
+      this.notificationService.shoInfo("No matching records found!!", "Information")
     }
   }
 }

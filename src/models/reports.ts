@@ -1,7 +1,6 @@
 import { datepickerAnimation } from 'ngx-bootstrap/datepicker/datepicker-animations';
 
-export class transaction
-{
+export class transaction {
     ID: number;
     CreatedDate: Date;
     TransactionDate: Date;
@@ -12,8 +11,7 @@ export class transaction
     Action: string;
 }
 
-export class usageSummary
-{
+export class usageSummary {
     SurName: string;
     FirstName: string;
     Smartcard: string;
@@ -21,8 +19,9 @@ export class usageSummary
     Kilometers: string;
 }
 
-export class usageHistory
-{
+export class usageHistory {
+    SurName: string;
+    FirstName: string;
     Smartcard: string;
     ActivityType: string;
     Date: string;
@@ -31,8 +30,7 @@ export class usageHistory
     Driver: string;
 }
 
-export class SearchParams
-{
+export class SearchParams {
     FromDate: Date;
     ToDate: Date;
     Smartcard?: string = "";
